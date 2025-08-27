@@ -10,9 +10,10 @@ class Solution {
                 cnt2++;
             }
         }
-        if(cnt1>1 || cnt2>0){
+        if(cnt1>1){
             return false;
         }
+        if(cnt2>0) return false;
         return true;
     }
 }
