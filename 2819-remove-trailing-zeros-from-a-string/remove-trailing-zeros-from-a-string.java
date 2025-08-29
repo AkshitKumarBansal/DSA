@@ -1,9 +1,9 @@
 class Solution {
     public String removeTrailingZeros(String num) {
-        StringBuilder sb = new StringBuilder(num);
-        while (sb.length() > 0 && sb.charAt(sb.length() - 1) == '0') {
-            sb.deleteCharAt(sb.length() - 1);
+        int i = num.length()-1;
+        while(i>=0 && num.charAt(i)=='0'){
+            i--;
         }
-        return sb.toString();
+        return num.substring(0,i+1);
     }
 }
