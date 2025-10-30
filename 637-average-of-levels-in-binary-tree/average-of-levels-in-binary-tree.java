@@ -21,18 +21,14 @@ class Solution {
         q.offer(root);
         while(!q.isEmpty()) {
             int len = q.size();
-            List<Integer> list = new ArrayList<>();
             double sum = 0;
             for(int i=0;i<len;i++) {
                 TreeNode node = q.poll();
+                sum += node.val;
                 if(node.left != null) q.offer(node.left);
                 if(node.right != null) q.offer(node.right);
-                list.add(node.val);
             }
-            for(int i=0;i<list.size();i++) {
-                sum += list.get(i);
-            }
-            res.add(sum/list.size());
+            res.add(sum/len);
         }
         return res;
     }
