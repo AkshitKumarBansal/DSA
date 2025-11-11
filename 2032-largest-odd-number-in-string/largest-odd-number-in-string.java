@@ -1,6 +1,6 @@
 class Solution {
     public String largestOddNumber(String num) {
-        if((num.charAt(num.length()-1)-'0')%2!=0) return num;
+        // if((num.charAt(num.length()-1)-'0')%2!=0) return num;
         int max = -1;
         for(int i=0;i<num.length();i++) {
             if((num.charAt(i)-'0')%2!=0) {
