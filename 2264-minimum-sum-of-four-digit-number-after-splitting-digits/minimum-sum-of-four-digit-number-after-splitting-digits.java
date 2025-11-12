@@ -3,7 +3,6 @@ class Solution {
         int[] arr = new int[4];
         int i = 0;
         while(num != 0) {
-            int rem = 0;
             arr[i++] = num%10;
             num /= 10;
         }
