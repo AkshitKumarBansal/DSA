@@ -5,7 +5,7 @@ class Solution {
         int cap = 0;
         Arrays.sort(capacity);
         for(int i=capacity.length-1;i>=0;i--) {
-            if(cap<sum) cap += capacity[i];
+            cap += capacity[i];
             if(cap>=sum) return capacity.length-i;
         }
         return -1;
