@@ -1,23 +1,25 @@
 class Solution {
+    private int count = 0;
     public int numIslands(char[][] grid) {
-        boolean[][] arr = new boolean[grid.length][grid[0].length];
-        int count = 0;
-        for(int i=0;i<grid.length;i++) {
-            for(int j=0;j<grid[0].length;j++) {
-                if(grid[i][j]=='1' && !arr[i][j]) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] arr = new int[m][n];
+        for(int i=0;i<m;i++) {
+            for(int j=0;j<n;j++) {
+                if(arr[i][j]==0 && grid[i][j]=='1') {
                     count++;
-                    dfs(grid, arr, i, j);
+                    dfs(i, j, arr, grid, m, n);
                 }
             }
         }
         return count;
     }
-    private void dfs(char[][] grid, boolean[][] arr,  int i, int j) {
-        if(i<0 || j<0 || i>=grid.length || j>=grid[i].length || grid[i][j]=='0' || arr[i][j]) return;
-        arr[i][j] = true;
-        dfs(grid, arr, i, j-1);
-        dfs(grid, arr, i, j+1);
-        dfs(grid, arr, i-1, j);
-        dfs(grid, arr, i+1, j);
+    private void dfs(int i, int j, int[][] arr, char[][] grid, int m, int n) {
+        if(i<0 || j<0 || i>=m || j>=n || arr[i][j]==1 || grid[i][j]=='0') return;
+        arr[i][j] = 1;
+        dfs(i+1, j, arr, grid, m, n);
+        dfs(i-1, j, arr, grid, m, n);
+        dfs(i, j+1, arr, grid, m, n);
+        dfs(i, j-1, arr, grid, m, n);
     }
 }
