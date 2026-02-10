@@ -5,7 +5,7 @@ class Solution {
         int sum1 = 0;
         int[] ans = new int[nums.length];
         for(int i=0;i<nums.length;i++) {
-            ans[i] = Math.abs(Math.abs(sum-nums[i]-sum1)-sum1);
+            ans[i] = Math.abs((sum - sum1 - nums[i]) - sum1);
             sum1 += nums[i];
         }
         return ans;
