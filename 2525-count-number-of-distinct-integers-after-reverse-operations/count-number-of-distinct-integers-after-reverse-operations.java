@@ -10,8 +10,7 @@ class Solution {
     public int Reverse(int n) {
         int rev = 0;
         while (n != 0) {
-            int digit = n % 10;
-            rev = rev * 10 + digit;
+            rev = (rev*10) + (n%10);
             n /= 10;
         }
         return rev;
