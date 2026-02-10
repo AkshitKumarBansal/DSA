@@ -1,0 +1,12 @@
+class Solution {
+    public int pivotInteger(int n) {
+        int sum = 0;
+        for(int i=1;i<=n;i++) sum += i;
+        int sum1 = 0;
+        for(int i=1;i<=n;i++) {
+            if(sum1 == sum-sum1-i) return i;
+            sum1 += i;
+        }
+        return -1;
+    }
+}
