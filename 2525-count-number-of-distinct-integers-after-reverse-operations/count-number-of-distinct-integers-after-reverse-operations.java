@@ -1,9 +1,9 @@
 class Solution {
     public int countDistinctIntegers(int[] nums) {
         Set<Integer> set = new HashSet<>();
-        for(int i=0;i<nums.length;i++) {
-            set.add(nums[i]);
-            set.add(Reverse(nums[i]));
+        for(int i : nums) {
+            set.add(i);
+            set.add(Reverse(i));
         }
         return set.size();
     }
