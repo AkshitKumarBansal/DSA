@@ -23,15 +23,10 @@ class Solution {
             }
             temp = temp.next;
         }
-        while(list1 != null) {
+        if(list1 != null) {
             temp.next = list1;
-            list1 = list1.next;
-            temp = temp.next;
-        }
-        while(list2 != null) {
+        } else {
             temp.next = list2;
-            list2 = list2.next;
-            temp = temp.next;
         }
         return head.next;
     }
