@@ -1,9 +1,19 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
-        for(int i=0;i<nums.length;i++) {
-            nums[i] = nums[i]*nums[i];
+        int n = nums.length;
+        int i=0,j=n-1,a=n-1;
+        int[] ans = new int[n];
+        while(i<=j) {
+            int left = nums[i]*nums[i];
+            int right = nums[j]*nums[j];
+            if(left>right) {
+                ans[a--] = left;
+                i++;
+            } else {
+                ans[a--] = right;
+                j--;
+            }
         }
-        Arrays.sort(nums);
-        return nums;
+        return ans;
     }
 }
