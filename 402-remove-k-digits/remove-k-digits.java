@@ -3,7 +3,6 @@ class Solution {
         Stack<Character> st = new Stack<>();
         int n = num.length();
         for(int i=0;i<n;i++) {
-            boolean flag = false;
             while(!st.isEmpty() && k>0 && num.charAt(i)<st.peek()) {
                 st.pop();
                 k--;
