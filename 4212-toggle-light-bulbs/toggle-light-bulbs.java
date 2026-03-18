@@ -1,8 +1,6 @@
 class Solution {
     public List<Integer> toggleLightBulbs(List<Integer> bulbs) {
         Map<Integer, Integer> map = new HashMap<>();
-
-        // Count frequency
         for (int b : bulbs) {
             map.put(b, map.getOrDefault(b, 0) + 1);
         }
