@@ -10,38 +10,17 @@
  */
 class Solution {
     public ListNode doubleIt(ListNode head) {
-        ListNode curr = head;
-        ListNode prev = null;
-        ListNode temp = null;
-        while(curr != null) {
-            temp = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = temp;
+        if(head.val >= 5) {
+            head = new ListNode(0, head);
         }
-        ListNode newHead = new ListNode(0);
-        ListNode newTemp = newHead;
-        int carry = 0;
-        while(prev != null) {
-            int num = (2*prev.val + carry)%10;
-            newTemp.next = new ListNode(num);
-            carry = (2*prev.val)/10;
-            newTemp = newTemp.next;
-            prev = prev.next;
+        ListNode temp = head;
+        while(temp != null) {
+            temp.val = (temp.val*2)%10;
+            if(temp.next!=null && temp.next.val>=5) {
+                temp.val += 1;
+            }
+            temp = temp.next;
         }
-        if(carry != 0) {
-            newTemp.next = new ListNode(carry);
-            newTemp = newTemp.next;
-        }
-        curr = newHead.next;
-        prev = null;
-        temp = null;
-        while(curr != null) {
-            temp = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = temp;
-        }
-        return prev;
+        return head;
     }
 }
