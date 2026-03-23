@@ -21,7 +21,6 @@ class Solution {
         temp = temp.next;
         k = k % len;
         int x = len - k - 1;
-        // ListNode curr = head;
         while(x!=0) {
             temp = temp.next;
             x--;
