@@ -4,12 +4,12 @@ class Solution {
         int n = nums.length;
         for(int i=0;i<n;i++) {
             int x = nums[i];
-            if(!map.containsKey(x)) {
+            int[] arr = map.get(x); // by reference not value
+            if(arr == null) {
                 map.put(x, new int[]{i, i, 1});
             } else {
-                int freq = map.get(x)[2];
-                map.get(x)[2] = freq+1;
-                map.get(x)[1] = i;
+                arr[1] = i;
+                arr[2]++;
             }
         }
         int max = 0;
