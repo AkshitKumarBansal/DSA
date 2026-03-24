@@ -5,7 +5,6 @@ class Solution {
             char ch = order.charAt(i);
             freq[ch-'a'] = i;
         }
-        StringBuilder sb = new StringBuilder();
         for(int i=1;i<words.length;i++) {
             boolean flag = false;
             for(int j=0;j<words[i].length() && j<words[i-1].length();j++) {
