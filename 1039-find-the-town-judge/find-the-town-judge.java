@@ -2,7 +2,7 @@ class Solution {
     public int findJudge(int n, int[][] trust) {
         int N = trust.length;
         if(n==1) return 1;
-        if(N==0 && n!=1) return -1;
+        if(N==0) return -1;
         Set<Integer> set = new HashSet<>();
         Map<Integer, Integer> map = new HashMap<>();
         for(int i=0;i<N;i++) set.add(trust[i][0]);
