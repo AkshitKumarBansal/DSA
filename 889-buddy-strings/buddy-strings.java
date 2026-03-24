@@ -1,24 +1,23 @@
 class Solution {
     public boolean buddyStrings(String s, String goal) {
         if(s.length()!=goal.length()) return false;
-        int[] freq = new int[26];
         int n = s.length();
-        int count = 0;
+        if(s.equals(goal)) {
+            int[] freq = new int[26];
+            for(int i=0;i<n;i++) {
+                char ch = s.charAt(i);
+                if(++freq[ch-'a']>1) return true;
+            }
+            return false;
+        }
+        int first = -1, second = -1;
         for(int i=0;i<n;i++) {
-            if(s.charAt(i)!=goal.charAt(i)) count++;
-            freq[s.charAt(i)-'a']++;
+            if(s.charAt(i)!=goal.charAt(i)) {
+                if(first==-1) first = i;
+                else if(second==-1) second = i;
+                else return false;
+            }
         }
-        int max = 0;
-        for(int i=0;i<26;i++) {
-            max = Math.max(max, freq[i]);
-        }
-        for(int i=0;i<n;i++) {
-            freq[goal.charAt(i)-'a']--;
-        }
-        for(int i=0;i<26;i++) {
-            if(freq[i]!=0) return false;
-        }
-        if((count==0 && max >= 2)) return true;
-        return (count != 2) ? false : true; 
+        return second != -1 && s.charAt(first)==goal.charAt(second) && s.charAt(second)==goal.charAt(first);
     }
 }
