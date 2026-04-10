@@ -1,0 +1,20 @@
+class Solution {
+    public int longestSubarray(int[] nums) {
+        int count = 0;
+        int n = nums.length;
+        int max = 0;
+        for(int i=0;i<n;i++) {
+            if(nums[i]==1) count++;
+            if(nums[i]==0) {
+                max = Math.max(max, solve(nums, i+1)+ count);
+                count = 0;
+            }
+        }
+        return Math.max(max, count-1);
+    }
+    private int solve(int[] nums, int ind) {
+        if(ind == nums.length) return 0;
+        if(nums[ind]==0) return 0;
+        return 1 + solve(nums, ind+1);
+    }
+}
