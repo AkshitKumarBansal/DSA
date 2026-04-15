@@ -2,8 +2,8 @@ class Solution {
     public String minWindow(String s, String t) {
         int i=0;
         int n = s.length();
+        int start = 0;
         int min = Integer.MAX_VALUE;
-        String res = "";
         int freq1[] = new int[26];
         int freq2[] = new int[26];
         for(int k = 0; k < t.length(); k++) {
@@ -32,7 +32,7 @@ class Solution {
                 }
                 if(min>(j-i+1)) {
                     min = j-i+1;
-                    res = s.substring(i, j+1);
+                    start = i;
                 }
                 i++;
                 flag = true;
@@ -42,32 +42,6 @@ class Solution {
                 }
             }
         }
-        return res;
+        return (min==Integer.MAX_VALUE) ? "" : s.substring(start, start+min);
     }
-    // private boolean check(String s, String t) {
-    //     int freq1[] = new int[26];
-    //     int freq2[] = new int[26];
-    //     for(int i=0;i<t.length();i++) {
-    //         char ch = t.charAt(i);
-    //         if(ch>='a' && ch<='z') freq1[ch-'a']++;
-    //         else freq2[ch-'A']++;
-    //     }
-    //     for(int i=0;i<s.length();i++) {
-    //         char ch = s.charAt(i);
-    //         if(ch>='a' && ch<='z') {
-    //             if(freq1[ch-'a']!=0) {
-    //                 freq1[s.charAt(i)-'a']--;
-    //             }
-    //         } else {
-    //             if(freq2[ch-'A']!=0) {
-    //                 freq2[s.charAt(i)-'A']--;
-    //             }
-    //         }
-    //     }
-    //     for(int i=0;i<26;i++) {
-    //         if(freq1[i]>0) return false;
-    //         if(freq2[i]>0) return false;
-    //     }
-    //     return true;
-    // }
 }
