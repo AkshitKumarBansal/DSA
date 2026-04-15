@@ -1,4 +1,5 @@
 class Solution {
+    // Create two arrays one prevSmallest another nextSmallest store the index of prev and next smallest elements in them.
     public int largestRectangleArea(int[] arr) {
         Stack<Integer> st = new Stack<>();
         int n = arr.length;
@@ -19,7 +20,7 @@ class Solution {
         }
         int max = 0;
         for(int i=0;i<n;i++) {
-            int area = arr[i]*(next[i]-prev[i]-1);
+            int area = arr[i]*(next[i]-prev[i]-1); // Formula to calculate the maximum area for each index
             max = Math.max(area, max);
         }
         return max;
