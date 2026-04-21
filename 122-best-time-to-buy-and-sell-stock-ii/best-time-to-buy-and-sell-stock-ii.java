@@ -1,19 +1,18 @@
 class Solution {
+    Integer[][] dp;
     public int maxProfit(int[] prices) {
-        if(prices.length == 0) return 0;
-        int x = 0;
-        int y = 1;
+        dp = new Integer[prices.length+1][2];
+        return solve(prices, 1, 0);
+    }
+    private int solve(int[] arr, int buy, int ind) {
+        if(ind == arr.length) return 0;
+        if(dp[ind][buy] != null) return dp[ind][buy];
         int profit = 0;
-        while(y < prices.length) {
-            if(prices[x]<prices[y]) {
-                profit += (prices[y] - prices[x]);
-                x = y;
-                y += 1;
-            } else {
-                x = y;
-                y += 1;
-            }
+        if(buy != 0) {
+            profit = Math.max(-arr[ind]+solve(arr, 0, ind+1), solve(arr, 1, ind+1));
+        } else {
+            profit = Math.max(arr[ind]+solve(arr, 1, ind+1), solve(arr, 0, ind+1));
         }
-        return profit;
+        return dp[ind][buy] = profit;
     }
 }
