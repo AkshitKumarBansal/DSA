@@ -1,21 +1,23 @@
 class Solution {
+    Integer[][] dp;
     public int rob(int[] nums) {
-        if(nums.length == 1) return nums[0];
-        if(nums.length == 2) return Math.max(nums[0], nums[1]);
-        int x = nums[0];
-        int y = Math.max(nums[0], nums[1]);
-        for(int i=2;i<nums.length-1;i++){
-            int z = Math.max(x+nums[i], y);
-            x = y;
-            y = z;
+        int n = nums.length;
+        if(n==1) return nums[0];
+        dp = new Integer[n+1][2];
+        int ans1 = solve(nums, 0, 0, n-1);
+        dp = new Integer[n][2];
+        int ans2 = solve(nums, 1, 0, n);
+        return Math.max(ans1, ans2);
+    }
+    private int solve(int[] arr, int ind, int rob, int end) {
+        if(ind==end) return 0;
+        if(dp[ind][rob]!=null) return dp[ind][rob];
+        int cash = 0;
+        if(rob==0) {
+            cash = Math.max(arr[ind]+solve(arr, ind+1, 1, end), solve(arr, ind+1, 0, end));
+        } else {
+            cash = solve(arr, ind+1, 0, end);
         }
-        int a = nums[1];
-        int b = Math.max(nums[1], nums[2]);
-        for(int i=3;i<nums.length;i++){
-            int c = Math.max(a+nums[i], b);
-            a = b;
-            b = c;
-        }
-        return Math.max(y, b);
+        return dp[ind][rob] = cash;
     }
 }
