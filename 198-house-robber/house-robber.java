@@ -1,11 +1,13 @@
 class Solution {
     public int rob(int[] nums) {
         int n = nums.length;
-        int[][] dp = new int[n+1][2];
+        int rob = 0, noRob = 0;
         for(int i=n-1;i>=0;i--) {
-            dp[i][0] = Math.max(nums[i]+dp[i+1][1], dp[i+1][0]);
-            dp[i][1] = dp[i+1][0];
+            int newRob = Math.max(nums[i]+noRob, rob);
+            int noNewRob = rob;
+            rob = newRob;
+            noRob = noNewRob;
         }
-        return dp[0][0];
+        return rob;
     }
 }
