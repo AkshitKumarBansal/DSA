@@ -1,17 +1,18 @@
 class Solution {
     int[][] dp;
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        dp = new int[obstacleGrid.length+1][obstacleGrid[0].length+1];
-        for(int i=0;i<=obstacleGrid.length;i++) {
-            Arrays.fill(dp[i], -1);
+    public int uniquePathsWithObstacles(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        if(grid[m-1][n-1] == 1) return 0;
+        dp = new int[m+1][n+1];
+        dp[m-1][n-1] = 1;
+        for(int i=m-1;i>=0;i--) {
+            for(int j=n-1;j>=0;j--) {
+                if(grid[i][j]==1) dp[i][j] = 0;
+                else if(i==m-1 && j==n-1) continue;
+                else dp[i][j] = dp[i+1][j] + dp[i][j+1];
+            }
         }
-        return solve(obstacleGrid, 0, 0);
-    }
-    private int solve(int[][] grid, int i, int j) {
-        if(i>=grid.length || j>=grid[0].length) return dp[i][j] = 0;
-        if(grid[i][j]==1) return dp[i][j] = 0;
-        if(i==grid.length-1 && j==grid[0].length-1) return dp[i][j] = 1;
-        if(dp[i][j] != -1) return dp[i][j];
-        return dp[i][j] = solve(grid, i+1, j) + solve(grid, i, j+1);
+        return dp[0][0];
     }
 }
