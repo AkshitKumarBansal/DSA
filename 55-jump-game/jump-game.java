@@ -1,21 +1,19 @@
 class Solution {
-    Boolean[] dp;
+    boolean[] dp;
     public boolean canJump(int[] nums) {
         int n = nums.length;
-        dp = new Boolean[n+1];
-        return solve(nums, 0);
-    }
-    private boolean solve(int[] arr, int ind) {
-        if(ind >= arr.length-1) return true;
-        if(dp[ind]!=null) return dp[ind];
-        if(arr[ind]==0) return dp[ind] = false;
-        for(int i=1;i<=arr[ind] && i<=arr.length;i++) {
-            if(solve(arr, ind + i)) {
-                return dp[ind] = true;
+        dp = new boolean[n+1];
+        dp[n-1] = true;
+        for(int i=n-2;i>=0;i--) {
+            for(int j=1;j<=nums[i] && i+j<n;j++) {
+                if(dp[i+j]) {
+                    dp[i] = true;
+                    break;
+                }
             }
         }
-        return dp[ind] = false;
+        return dp[0];
     }
 }
 
-// Memoized Code
+// Tabulation Code
