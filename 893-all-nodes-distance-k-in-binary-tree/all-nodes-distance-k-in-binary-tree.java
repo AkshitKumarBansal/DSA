@@ -8,7 +8,8 @@
  * }
  */
 class Solution {
-    private void markParent(TreeNode root, Map<TreeNode, TreeNode> map, TreeNode target) {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        Map<TreeNode, TreeNode> map = new HashMap<>(); // Parent Map to move backward in binary tree
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
         while(!q.isEmpty()) {
@@ -22,40 +23,35 @@ class Solution {
                 q.offer(node.right);
             }
         }
-    }
-    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        Map<TreeNode, TreeNode> map = new HashMap<>();
-        markParent(root, map, target);
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(target);
+        while(!q.isEmpty()) q.poll();
         Map<TreeNode, Boolean> visited = new HashMap<>();
         visited.put(target, true);
+        q.offer(target);
         int level = 0;
         while(!q.isEmpty()) {
-            int len = q.size();
+            int size = q.size();
             if(level == k) break;
             level++;
-            for(int i=0;i<len;i++) {
+            for(int i=0;i<size;i++) {
                 TreeNode node = q.poll();
-                if(node.left != null && visited.get(node.left)==null) {
+                if(node.left != null && visited.get(node.left) == null) {
                     q.offer(node.left);
                     visited.put(node.left, true);
                 }
-                if(node.right != null && visited.get(node.right)==null) {
+                if(node.right != null && visited.get(node.right) == null) {
                     q.offer(node.right);
                     visited.put(node.right, true);
                 }
-                if(map.get(node)!= null && visited.get(map.get(node))==null) {
+                if(map.get(node)!=null && visited.get(map.get(node))==null) {
                     q.offer(map.get(node));
                     visited.put(map.get(node), true);
                 }
             }
         }
-        List<Integer> res = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         while(!q.isEmpty()) {
-            TreeNode node = q.poll();
-            res.add(node.val);
+            result.add(q.poll().val);
         }
-        return res; 
+        return result;
     }
 }
