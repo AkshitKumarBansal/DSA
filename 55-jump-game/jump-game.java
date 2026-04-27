@@ -1,19 +1,18 @@
 class Solution {
-    boolean[] dp;
     public boolean canJump(int[] nums) {
-        int n = nums.length;
-        dp = new boolean[n+1];
-        dp[n-1] = true;
-        for(int i=n-2;i>=0;i--) {
-            for(int j=1;j<=nums[i] && i+j<n;j++) {
-                if(dp[i+j]) {
-                    dp[i] = true;
-                    break;
-                }
+        // if(nums.length <= 1) return true;
+        int max = 0;
+        for(int i=0;i<nums.length;i++) {
+            if(max >= nums.length-1) return true;
+            if(nums[i]==0) {
+                if(max <= i) return false;
+                else max = Math.max(nums[i]+i, max);
+            } else {
+                max = Math.max(nums[i]+i, max);
             }
         }
-        return dp[0];
+        return true;
     }
 }
 
-// Tabulation Code
+// Greedy Approach
