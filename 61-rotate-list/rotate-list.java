@@ -18,7 +18,6 @@ class Solution {
             len++;
         }
         temp.next = head;
-        // temp = temp.next;
         k = k % len;
         int x = len - k;
         while(x!=0) {
