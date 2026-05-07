@@ -45,3 +45,4 @@ class Solution {
 // First Create a graph from the array then find the longest depth using dfs
 // Time Complexity -> O(nlogn) + O(n^2) + O(2^n) = O(2^n)
 // Space Complexity -> O(n)(recursive stack) + O(n^2)(graph) = O(n^2)
+// Optimize the code know time complexity -> O(n^2)
