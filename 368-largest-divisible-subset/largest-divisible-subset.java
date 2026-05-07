@@ -3,46 +3,37 @@ class Solution {
     public List<Integer> largestDivisibleSubset(int[] nums) {
         Arrays.sort(nums);
         int n = nums.length;
-        Map<Integer, List<Integer>> graph = new HashMap<>();
-        for(int num : nums) {
-            graph.put(num, new ArrayList<>());
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for(int i : nums) {
+            map.put(i, new ArrayList<>());
         }
-        for(int i = 0; i < nums.length; i++) {
-            for(int j = i + 1; j < nums.length; j++) {
-                if(nums[j] % nums[i] == 0) {
-                    graph.get(nums[i]).add(nums[j]);
+        for(int i=0;i<n;i++) {
+            for(int j=i+1;j<n;j++) {
+                if(nums[j]%nums[i]==0) {
+                    map.get(nums[i]).add(nums[j]);
                 }
             }
         }
-        List<Integer> answer = new ArrayList<>();
-        for(int num : nums) {
-            List<Integer> curr = dfs(num, graph);
-            if(curr.size() > answer.size()) {
-                answer = curr;
-            }
+        List<Integer> result = new ArrayList<>();
+        for(int i : nums) {
+            List<Integer> curr = solve(i, map);
+            if(curr.size()>result.size()) result = curr;
         }
-        return answer;
+        return result;
     }
-    private List<Integer> dfs(int node, Map<Integer, List<Integer>> graph) {
-        if(memo.containsKey(node)) {
-            return memo.get(node);
+    private List<Integer> solve(int num, Map<Integer, List<Integer>> map) {
+        if(memo.containsKey(num)) {
+            return new ArrayList<>(memo.get(num));
         }
-        List<Integer> best = new ArrayList<>();
-        for(int next : graph.get(node)) {
-            List<Integer> temp = dfs(next, graph);
-            if(temp.size() > best.size()) {
-                best = temp;
-            }
+        List<Integer> ans = new ArrayList<>();
+        for(int node : map.get(num)) {
+            List<Integer> curr = solve(node, map);
+            if(curr.size()>ans.size()) ans = curr;
         }
         List<Integer> result = new ArrayList<>();
-        result.add(node);
-        result.addAll(best);
-        memo.put(node, result);
+        result.add(num);
+        result.addAll(ans);
+        memo.put(num, result);
         return result;
     }
 }
-
-// First Create a graph from the array then find the longest depth using dfs
-// Time Complexity -> O(nlogn) + O(n^2) + O(2^n) = O(2^n)
-// Space Complexity -> O(n)(recursive stack) + O(n^2)(graph) = O(n^2)
-// Optimize the code now time complexity -> O(n^2)
