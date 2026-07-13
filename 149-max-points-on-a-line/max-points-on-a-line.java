@@ -23,3 +23,5 @@ class Solution {
         return result;
     }
 }
+
+// Brute Force Solution
