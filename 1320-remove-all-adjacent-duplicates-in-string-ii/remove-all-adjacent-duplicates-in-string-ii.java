@@ -1,28 +1,20 @@
 class Solution {
     public String removeDuplicates(String s, int k) {
-        Stack<Pair> st = new Stack<>();
-        StringBuilder sb = new StringBuilder();
-        for (char ch : s.toCharArray()) {
-            if (!st.isEmpty() && st.peek().ch == ch) {
-                st.peek().cnt++;
-                if (st.peek().cnt == k) {
-                    st.pop();
-                }
-            } else {
-                st.push(new Pair(ch, 1));
+        Deque<int[]> st=new ArrayDeque<>();
+        for(char ch:s.toCharArray()){
+            if(!st.isEmpty() && st.peek()[0]==ch){
+                st.peek()[1]++;
+                if(st.peek()[1]==k) st.pop();
             }
+            else st.push(new int[]{ch,1});
         }
-        for (Pair p : st) {
-            sb.append(String.valueOf(p.ch).repeat(p.cnt));
+        StringBuilder sb=new StringBuilder();
+        while(!st.isEmpty()){
+            int[] pair=st.pop();
+            char ch=(char)pair[0];
+            int rep=pair[1];
+            for(int i=0;i<rep;i++) sb.append(ch);
         }
-        return sb.toString();
-    }
-}
-class Pair {
-    char ch;
-    int cnt;
-    Pair(char ch, int cnt) {
-        this.ch = ch;
-        this.cnt = cnt;
+        return sb.reverse().toString();
     }
 }
