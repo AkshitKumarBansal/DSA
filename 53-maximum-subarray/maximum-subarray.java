@@ -3,10 +3,11 @@ class Solution {
         int n = nums.length;
         int currSum = 0, maxSum = Integer.MIN_VALUE;
         for(int i=0;i<n;i++) {
-            currSum += nums[i];
+            currSum = Math.max(currSum + nums[i], nums[i]);
             maxSum = Math.max(maxSum, currSum);
-            if(currSum < 0) currSum = 0;
         }
         return maxSum;
     }
 }
+
+// Kadane's Algorithm
